@@ -19,7 +19,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Custom Card"),
+          title: Text("Latihan "),
         ),
         body: Container());
   }
