@@ -15,7 +15,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,14 +29,30 @@ class MainPage extends StatelessWidget {
           title: Text("Latihan QR CODE"),
         ),
         body: Center(
-          child: QrImage(
-            version: 6,
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-            errorCorrectionLevel: QrErrorCorrectLevel.M,
-            padding: EdgeInsets.all(20),
-            size: 200.00,
-            data: "riyan",
+          child: Column(
+            children: [
+                 Container(
+                margin: EdgeInsets.all(20),
+                child: TextField(
+                  
+                  controller: textController,
+
+                ),
+              ),
+              RaisedButton(onPressed: () {
+                setState(() { });
+              },child: Text("Generate QR"),color: Colors.amber,),
+              QrImage(
+                version: 6,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                errorCorrectionLevel: QrErrorCorrectLevel.M,
+                padding: EdgeInsets.all(20),
+                size: 200.00,
+                data: textController.text,
+              ),
+           
+            ],
           ),
         ));
   }
