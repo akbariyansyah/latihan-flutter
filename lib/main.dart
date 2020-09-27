@@ -34,6 +34,9 @@ class _MainPageState extends State<MainPage> {
                  Container(
                 margin: EdgeInsets.all(20),
                 child: TextField(
+                  decoration: InputDecoration(
+                    hintText: "Input here..."
+                  ),
                   controller: textController,
                 ),
               ),
