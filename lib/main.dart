@@ -34,9 +34,7 @@ class _MainPageState extends State<MainPage> {
                  Container(
                 margin: EdgeInsets.all(20),
                 child: TextField(
-                  
                   controller: textController,
-
                 ),
               ),
               RaisedButton(onPressed: () {
