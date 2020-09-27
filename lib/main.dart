@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             color: Colors.white,
           ),
           title: Text(
-            "Latihan Appbar",
+            "Latihan Appbar Gradient",
             style: TextStyle(color: Colors.white),
           ),
           actions: [
