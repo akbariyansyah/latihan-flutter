@@ -13,45 +13,35 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-class SecondPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("This is working"),
-      ),
-    );
-  }
-}
+
 class MainPage extends StatelessWidget {
+  TabBar myTabBar = TabBar(
+    indicator: BoxDecoration(
+        color: Colors.red,
+        border: Border(top: BorderSide(color: Colors.black, width: 5))),
+    tabs: [
+      Tab(
+        icon: Icon(Icons.comment),
+        text: "Comments",
+      ),
+      Tab(child: Image(image: AssetImage("assets/cute.png"))),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Latihan TabBar"),
-          bottom: TabBar(
-            tabs: [
-              Tab(
-                icon: Icon(Icons.comment),
-                text: "Comments",
-              ),
-              Tab(child: Image(image: AssetImage("assets/cute.png"))),
-              Tab(
-                icon: Icon(Icons.computer),
-              ),
-              Tab(
-                text: "News",
-              ),
-            ],
-          ),
-        ),
+            elevation: 10,
+            backgroundColor: Colors.pink[300],
+            title: Text("Latihan TabBar"),
+            bottom: PreferredSize(
+                preferredSize: Size.fromHeight(myTabBar.preferredSize.height),
+                child: Container(color: Colors.pink[300], child: myTabBar))),
         body: TabBarView(children: [
           Center(child: Text("Tab pertama")),
           Center(child: Text("Tab kedua")),
-          Center(child: Text("Tab ketiga")),
-          Center(child: Text("Tab keempat")),
         ]),
       ),
     );
