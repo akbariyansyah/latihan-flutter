@@ -19,23 +19,15 @@ class MyApp extends StatelessWidget {
             color: Colors.white,
           ),
           title: Text(
-            "Latihan Appbar",
+            "Latihan Image",
             style: TextStyle(color: Colors.white),
           ),
-          actions: [
-            IconButton(icon: Icon(Icons.settings), onPressed: () {}),
-            IconButton(icon: Icon(Icons.exit_to_app), onPressed: () {}),
-          ],
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [color1, color2],
-                    begin: FractionalOffset.topLeft,
-                    end: FractionalOffset.bottomRight),
-                image: DecorationImage(
-                    image: AssetImage("assets/pattern.png"),
-                    fit: BoxFit.cover,
-                    repeat: ImageRepeat.repeatX)),
+          
+        ),
+        body: Center(
+          child: Container(
+            margin: EdgeInsets.all(20),
+            child: Image(image: AssetImage("assets/image-1.jpg")),
           ),
         ),
       ),
