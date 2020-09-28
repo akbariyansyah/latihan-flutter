@@ -64,6 +64,15 @@ flutter:
     - family: Lobster
       fonts:
         - asset: fonts/Lobster-Regular.ttf
+    - family: Cardo
+      fonts:
+        - asset: fonts/Cardo-Regular.ttf
+    - family: Milonga
+      fonts:
+        - asset: fonts/Milonga-Regular.ttf
+    - family: Gabriola
+      fonts:
+        - asset: fonts/Gabriola-Regular.ttf
    
   #
   # For details regarding fonts from package dependencies,
