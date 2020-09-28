@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,28 +15,81 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  AudioPlayer audioPlayer;
+
+  String songDuration = "00:00:00";
+
+  _MainPageState() {
+    audioPlayer = AudioPlayer();
+    audioPlayer.onAudioPositionChanged.listen((duration) {
+      setState(() {
+        songDuration = duration.toString();
+      });
+    });
+    audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+  }
+  void playSound(String url) async {
+    await audioPlayer.play(url);
+  }
+
+  void stopSound() async {
+    await audioPlayer.stop();
+  }
+
+  void pauseSound() async {
+    await audioPlayer.pause();
+  }
+
+  void resumeSound() async {
+    audioPlayer.resume();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Gradient Opacity"),
+          title: Text("Playing Music"),
         ),
         body: Center(
-          child: ShaderMask(
-              shaderCallback: (rectangle) {
-                return LinearGradient(
-                        colors: [Colors.black, Colors.transparent],
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter)
-                    .createShader(
-                        Rect.fromLTRB(0, 0, rectangle.width, rectangle.height));
-              },
-              blendMode: BlendMode.dstIn,
-              child: Image(
-                  width: 300,
-                  image: NetworkImage(
-                      "https://images.unsplash.com/photo-1593642702749-b7d2a804fbcf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              RaisedButton(
+                onPressed: () {
+                  playSound("https://freemp3cloud.com/mr/601dfcd50ccbca489d2b4b58314f78cb.mp3?session_key=b10499827dcde25392424bd99704ccf5");
+                },
+                child: Text("PLAY"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  pauseSound();
+                },
+                child: Text("PAUSE"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  stopSound();
+                },
+                child: Text("STOP"),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  resumeSound();
+                },
+                child: Text("RESUME"),
+              ),
+              Text(
+                songDuration,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              )
+            ],
+          ),
         ));
   }
 }
