@@ -22,28 +22,31 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  Random random = Random();
+  List<Widget> list = [];
+
+  _MainPageState() {
+    for (int i = 1; i <= 40; i++) {
+      list.add(Text(
+        "Tulisan ke-$i",
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500,color: Colors.black),
+      ));
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Latihan Gesture Detector & Animated Container",
-            maxLines: 2,
-          ),
+      appBar: AppBar(
+        title: Text(
+          "Latihan Listview",
         ),
-        body: GestureDetector(
-          onTap: () {
-            setState(() {});
-          },
-          child: Center(
-            child: AnimatedContainer(
-              color: Color.fromARGB(255, random.nextInt(256), random.nextInt(256), random.nextInt(256)),
-              duration: Duration(seconds: 1),
-              width: 50.0 + random.nextInt(251),
-              height: 50.0 + random.nextInt(251),
-            ),
-          ),
-        ));
+      ),
+      body: ListView(
+        children: [
+          Column(
+            children: list,
+          )
+        ],
+      )
+    );
   }
 }
