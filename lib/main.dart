@@ -22,35 +22,14 @@ class MainPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Latihan Row dan Column",
+            "Latihan Text Widgetn",
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Text 1"),
-                Text("Text 2"),
-                Text("Text 3"),
-              ],
-            ),    Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Text 4"),
-                Text("Text 5"),
-                Text("Text 6"),
-              ],
-            ),    Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Text 7"),
-                Text("Text 8"),
-                Text("Text 9"),
-              ],
-            ),
-          ],
+        body: Center(
+          child: Text(
+            "Hello World",
+            style: TextStyle(fontSize: 50),
+          ),
         ));
     ;
   }
