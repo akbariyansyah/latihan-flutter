@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/user_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,66 +14,82 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatefulWidget {
-  @override
-  _MainPageState createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  TextEditingController idController = TextEditingController();
-  String output = "Belum ada data";
+class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Http Get List"),
+          title: Text("Latihan Stack"),
         ),
-        body: Container(
-          margin: EdgeInsets.fromLTRB(10, 30, 10, 0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+        body: Stack(
+          children: [
+            Column(
               children: [
-                Container(
-                  child: Text(
-                    "Get Users by Page",
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontFamily: "Lobster",
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black),
+                Flexible(
+                  flex: 1,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          color: Colors.red,
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextField(
-                    decoration: InputDecoration(hintText: "Input page"),
-                    controller: idController,
-                  ),
-                ),
-                RaisedButton(
-                  child: Text("GET"),
-                  onPressed: () {
-                    User.GetUserList(idController.text).then((res) {
-                      output = "";
-                      for (int i =0;i <res.length;i++) {
-                        output += "id : " + res[i].id + "\t" + "name : " + res[i].name + "\n";
-                      }
-                      setState(() {});
-                    });
-                  },
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
-                  child: Text(
-                    output,style: TextStyle(
-                    fontSize: 20
-                  ),
+                Flexible(
+                  flex: 1,
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-          ),
+            ListView(
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(20, 10, 20, 40),
+                  child: Image.asset("assets/image-1.jpg"),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(20, 10, 20, 40),
+                  child: Image.asset("assets/image-2.jpg"),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(20, 10, 20, 40),
+                  child: Image.asset("assets/image-3.jpg"),
+                ),
+              ],
+            ),
+            Align(
+              alignment: Alignment(0,0.80),
+              child: RaisedButton(
+                color: Colors.amber,
+                onPressed: () {},
+                child: Text("Button"),
+              ),
+            )
+          ],
         ));
   }
 }
