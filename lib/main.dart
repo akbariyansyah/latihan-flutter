@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,60 +16,34 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  Random random = Random();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Latihan Flexible widget"),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            flex: 1,
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    margin: EdgeInsets.all(10),
-                    color: Colors.red,
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    margin: EdgeInsets.all(10),
-                    color: Colors.lightGreenAccent,
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-                  child: Container(
-                    margin: EdgeInsets.all(10),
-                    color: Colors.lightBlueAccent,
-                  ),
-                ),
-              ],
+        appBar: AppBar(
+          title: Text(
+            "Latihan Gesture Detector & Animated Container",
+            maxLines: 2,
+          ),
+        ),
+        body: GestureDetector(
+          onTap: () {
+            setState(() {});
+          },
+          child: Center(
+            child: AnimatedContainer(
+              color: Color.fromARGB(255, random.nextInt(256), random.nextInt(256), random.nextInt(256)),
+              duration: Duration(seconds: 1),
+              width: 50.0 + random.nextInt(251),
+              height: 50.0 + random.nextInt(251),
             ),
           ),
-          Flexible(
-            flex: 1,
-            child: Container(
-              margin: EdgeInsets.all(10),
-              color: Colors.amber,
-            ),
-          ),
-          Flexible(
-            flex: 1,
-            child: Container(
-              margin: EdgeInsets.all(10),
-              color: Colors.lightGreen,
-            ),
-          ),
-        ],
-      ),
-    );
+        ));
   }
 }
