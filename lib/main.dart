@@ -16,44 +16,34 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatefulWidget {
-  @override
-  _MainPageState createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  bool isPressed = false;
+class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Latihan Statefull WIdget",
+            "Latihan Container",
           ),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: (isPressed)
-                  ? Icon(
-                      Icons.adb,
-                      size: 80,
-                      color: Colors.red,
-                    )
-                  : Text(""),
+        body: Center(
+          child: Container(
+            width: 300,
+            height: 300,
+            padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+            child: Text(
+              "Hi , I'm a Container",
+              style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.white),
             ),
-            Center(
-              child: RaisedButton(
-                onPressed: () {
-                  setState(() {
-                    isPressed = !isPressed;
-                  });
-                },
-                child: Text("Click Me"),
-              ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              color: Colors.amber,
+
             ),
-          ],
+          ),
         ));
+    ;
   }
 }
