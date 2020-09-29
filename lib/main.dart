@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hexcolor/hexcolor.dart';
-import 'package:myapp/post_result_model.dart';
+import 'package:myapp/user_model.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,14 +21,13 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController jobController = TextEditingController();
-  PostResult postResult = null;
+  TextEditingController idController = TextEditingController();
+  User user = null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Http Post"),
+          title: Text("Latihan Http Get"),
         ),
         body: Container(
           margin: EdgeInsets.fromLTRB(10, 30, 10, 0),
@@ -39,7 +37,7 @@ class _MainPageState extends State<MainPage> {
               children: [
                 Container(
                   child: Text(
-                    "Post New User",
+                    "Get User by ID",
                     style: TextStyle(
                         fontSize: 30,
                         fontFamily: "Lobster",
@@ -50,23 +48,15 @@ class _MainPageState extends State<MainPage> {
                 Container(
                   margin: EdgeInsets.all(20),
                   child: TextField(
-                    decoration: InputDecoration(hintText: "Input name"),
-                    controller: nameController,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: TextField(
-                    decoration: InputDecoration(hintText: "Input job"),
-                    controller: jobController,
+                    decoration: InputDecoration(hintText: "Input id"),
+                    controller: idController,
                   ),
                 ),
                 RaisedButton(
-                  child: Text("POST"),
+                  child: Text("GET"),
                   onPressed: () {
-                    PostResult.PostReq(nameController.text, jobController.text)
-                        .then((res) {
-                      postResult = res;
+                    User.GetUser(idController.text).then((res) {
+                      user = res;
                       setState(() {});
                     });
                   },
@@ -74,14 +64,10 @@ class _MainPageState extends State<MainPage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
                   child: Text(
-                    (postResult != null)
-                        ? "id : " + postResult.id +
+                    (user != null)
+                        ? "id : " + user.id +
                             "\n" +
-                           "name : " + postResult.name +
-                            "\n" +
-                          "job : " +  postResult.job +
-                            "\n" +
-                           "created at : " + postResult.created
+                           "name : " + user.name
                         : "Tidak ada data",
                     style: TextStyle(
                       fontSize: 20,
