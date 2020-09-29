@@ -22,41 +22,35 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int counter = 0;
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Latihan Anonymouse method",
+            "Latihan Statefull WIdget",
           ),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-              child: Text(
-                counter.toString(),
-                style: TextStyle(fontSize: 30),
-              ),
+              child: (isPressed)
+                  ? Icon(
+                      Icons.adb,
+                      size: 80,
+                      color: Colors.red,
+                    )
+                  : Text(""),
             ),
             Center(
               child: RaisedButton(
                 onPressed: () {
                   setState(() {
-                    counter += 1;
+                    isPressed = !isPressed;
                   });
                 },
-                child: Text("PLUS"),
-              ),
-            ),     Center(
-              child: RaisedButton(
-                onPressed: () {
-                  setState(() {
-                    counter -= 1;
-                  });
-                },
-                child: Text("MINUS"),
+                child: Text("Click Me"),
               ),
             ),
           ],
