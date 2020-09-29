@@ -22,12 +22,12 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   TextEditingController idController = TextEditingController();
-  User user = null;
+  String output = "Belum ada data";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Http Get"),
+          title: Text("Latihan Http Get List"),
         ),
         body: Container(
           margin: EdgeInsets.fromLTRB(10, 30, 10, 0),
@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
               children: [
                 Container(
                   child: Text(
-                    "Get User by ID",
+                    "Get Users by Page",
                     style: TextStyle(
                         fontSize: 30,
                         fontFamily: "Lobster",
@@ -48,15 +48,18 @@ class _MainPageState extends State<MainPage> {
                 Container(
                   margin: EdgeInsets.all(20),
                   child: TextField(
-                    decoration: InputDecoration(hintText: "Input id"),
+                    decoration: InputDecoration(hintText: "Input page"),
                     controller: idController,
                   ),
                 ),
                 RaisedButton(
                   child: Text("GET"),
                   onPressed: () {
-                    User.GetUser(idController.text).then((res) {
-                      user = res;
+                    User.GetUserList(idController.text).then((res) {
+                      output = "";
+                      for (int i =0;i <res.length;i++) {
+                        output += "id : " + res[i].id + "\t" + "name : " + res[i].name + "\n";
+                      }
                       setState(() {});
                     });
                   },
@@ -64,15 +67,9 @@ class _MainPageState extends State<MainPage> {
                 Container(
                   margin: EdgeInsets.fromLTRB(0, 40, 0, 0),
                   child: Text(
-                    (user != null)
-                        ? "id : " + user.id +
-                            "\n" +
-                           "name : " + user.name
-                        : "Tidak ada data",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                    ),
+                    output,style: TextStyle(
+                    fontSize: 20
+                  ),
                   ),
                 ),
               ],
