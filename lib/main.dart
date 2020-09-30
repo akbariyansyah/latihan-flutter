@@ -1,69 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/login_page.dart';
+import 'package:myapp/main_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MainPage(),
-    );
-  }
+  _MyAppState createState() => _MyAppState();
 }
 
-class MainPage extends StatefulWidget {
-  @override
-  _MainPageState createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  TextEditingController textController = TextEditingController(text: "no Name");
-  void saveData() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString("name", textController.text);
+class _MyAppState extends State<MyApp> {
+  String name;
+  _MyAppState() {
+    getName().then((value) {
+      setState(() {
+        name = value;
+      });
+    });
   }
   Future<String> getName() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    return pref.getString("name") ?? "no name iserted";
+    print(pref.getString("username"));
+    return pref.getString("username") ?? "no name inserted";
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Latihan Shared Preferences"),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            margin: EdgeInsets.all(20),
-            child: TextField(
-              controller: textController,
-            ),
-          ),
-          RaisedButton(
-            onPressed: () {
-              saveData();
-            },
-            child: Text("SAVE DATA"),
-          ),
-          RaisedButton(
-            onPressed: () {
-              getName().then((value) {
-                setState(() {
-                textController.text = value;
-                });
-              });
-            },
-            child: Text("LOAD DATA"),
-          ),
-        ],
-      ),
-    );
+    return MaterialApp(
+        home: (name == null || name == "no name inserted")
+            ? LoginPage()
+            : MainPage(name: name));
   }
 }
