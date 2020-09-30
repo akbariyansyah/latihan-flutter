@@ -14,69 +14,126 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.lightBlue[50],
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text(
-            "Latihan Hero widget",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        body: GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return SecondPage();
-            }));
-          },
-          child: Hero(
-            tag: "ironman",
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(100),
-              child: Container(
-                width: 200,
-                height: 200,
-                child: Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                        "https://www.straitstimes.com/sites/default/files/styles/article_pictrure_780x520_/public/articles/2019/04/16/lwx_ironman_160419_109.jpg?itok=sLqm9KNi&timestamp=1555392332")),
-              ),
-            ),
-          ),
-        ));
-  }
+  _MainPageState createState() => _MainPageState();
 }
 
-class SecondPage extends StatelessWidget {
+class _MainPageState extends State<MainPage> {
+  double myPadding = 5;
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.pink[200],
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text(
-            "Second Page",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        body: Center(
-          child: Hero(
-            tag: "ironman",
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(200),
-              child: Container(
-                width: 400,
-                height: 400,
-                child: Image(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                        "https://www.straitstimes.com/sites/default/files/styles/article_pictrure_780x520_/public/articles/2019/04/16/lwx_ironman_160419_109.jpg?itok=sLqm9KNi&timestamp=1555392332")),
-              ),
+      appBar: AppBar(
+        title: Text("Latihan Animated padding"),
+      ),
+      body: Column(
+        children: [
+          Flexible(
+            flex: 1,
+            child: Row(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: AnimatedPadding(
+                    duration: Duration(milliseconds: 500),
+                    padding: EdgeInsets.all(myPadding),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isPressed = !isPressed;
+                          if (isPressed) {
+                            myPadding = 20;
+                          } else {
+                            myPadding = 5;
+                          }
+                        });
+                      },
+                      child: Container(
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: AnimatedPadding(
+                    duration: Duration(milliseconds: 500),
+                    padding: EdgeInsets.all(myPadding),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isPressed = !isPressed;
+                          if (isPressed) {
+                            myPadding = 20;
+                          } else {
+                            myPadding = 5;
+                          }
+                        });
+                      },
+                      child: Container(
+                        color: Colors.green,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        ));
+          Flexible(
+            flex: 1,
+            child: Row(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: AnimatedPadding(
+                    duration: Duration(milliseconds: 500),
+                    padding: EdgeInsets.all(myPadding),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isPressed = !isPressed;
+                          if (isPressed) {
+                            myPadding = 20;
+                          } else {
+                            myPadding = 5;
+                          }
+                        });
+                      },
+                      child: Container(
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: AnimatedPadding(
+                    duration: Duration(milliseconds: 500),
+                    padding: EdgeInsets.all(myPadding),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          isPressed = !isPressed;
+                          if (isPressed) {
+                            myPadding = 20;
+                          } else {
+                            myPadding = 5;
+                          }
+                        });
+                      },
+                      child: Container(
+                        color: Colors.yellow,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
