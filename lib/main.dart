@@ -1,62 +1,70 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapp/color_bloc.dart';
+import 'package:bloc/bloc.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  ColorBloc colorBloc = ColorBloc();
-
-  @override
-  void dispose() {
-    colorBloc.dispose();
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Latihan Bloc tanpa package"),
+      home: BlocProvider<ColorBloc>(
+          builder: (context) => ColorBloc(),
+          child: MainPage()),
+    );
+  }
+}
+
+class MainPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
+  ColorBloc colorBloc = BlocProvider.of<ColorBloc>(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Latihan bloc dengan package",),
+        flexibleSpace: BlocBuilder<ColorBloc,Color>(
+          builder: (context,currentColor) => AnimatedContainer(
+            duration: Duration(milliseconds: 500),
+            color: currentColor,
+          ),
         ),
-        body: Center(
-            child: StreamBuilder(
-          stream: colorBloc.stateStream,
-          initialData: Colors.amber,
-          builder: (context, snapshot) => AnimatedContainer(
-            width: 200,
-            height: 200,
-            color: snapshot.data,
+      ),
+      body: Center(
+        child: BlocBuilder<ColorBloc,Color>(
+          builder: (context,currentColor) =>
+           AnimatedContainer(
+            width: 150,
+            height: 150,
+            color: currentColor,
             duration: Duration(milliseconds: 500),
           ),
-        )),
-        floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            FloatingActionButton(
-              onPressed: () {
-                colorBloc.eventSink.add(ColorEvent.to_amber);
-              },
-              backgroundColor: Colors.amber,
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                colorBloc.eventSink.add(ColorEvent.to_lightblue);
-              },
-              backgroundColor: Colors.lightBlue,
-            ),
-          ],
         ),
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              colorBloc.dispatch(ColorEvent.to_amber);
+            },
+            backgroundColor: Colors.amber,
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              colorBloc.dispatch(ColorEvent.to_light_blue);
+            },
+            backgroundColor: Colors.lightBlue,
+          ),
+        ],
       ),
     );
   }
