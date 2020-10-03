@@ -1,55 +1,81 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
-import 'package:myapp/product_card.dart';
+
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<bool> isSelected = [true, false, false];
+  ColorFilter myColorFilter = ColorFilter.mode(Colors.blue, BlendMode.screen);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.orange,
-          title: Text("Latihan Product Card"),
-        ),
-        body: ChangeNotifierProvider<ProductState>(
-          builder: (context) => ProductState(),
-          child: Container(
-            margin: EdgeInsets.all(30),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Consumer<ProductState>(
-                builder: (context,productState,_) => ProductCard(
-                  imageURL:
-                      "https://images.unsplash.com/photo-1546548970-71785318a17b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-                  name: "Fruits",
-                  price: "Rp. 10.000",
-                  quantity: productState.quantity,
-                  notification: (productState.quantity > 5) ? "Diskon 10 %" : null,
-                  onAddTap: () {
-                    productState.quantity++;
-                  },
-                  onDecTap: () {
-                    productState.quantity--;
-                  },
-                ),
+      home: ColorFiltered(
+        colorFilter: myColorFilter,
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                "Latihan Selectable, toggleButton, coloredfilter",
+                maxLines: 2,
               ),
             ),
-          ),
-        ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SelectableText(
+                  "Ini adalah contoh selectable text SIlahkan pilih saya,",
+                  showCursor: true,
+                  cursorWidth: 3,
+                  cursorColor: Colors.red,
+                  style: TextStyle(fontSize: 25),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ToggleButtons(
+                  children: [
+                    Icon(Icons.adb),
+                    Icon(Icons.add),
+                    Icon(Icons.remove_circle),
+                  ],
+                  isSelected: isSelected,
+                  onPressed: (index) {
+                    setState(() {
+                      for (int i = 0; i < isSelected.length; i++) {
+                        if (index == 0) {
+                          myColorFilter = ColorFilter.mode(Colors.blue,
+                              BlendMode.screen);
+                        } else if (index == 1) {
+                          myColorFilter = ColorFilter.mode(
+                              Colors.green, BlendMode.hue);
+                        } else {
+                          myColorFilter = ColorFilter.mode(
+                              Colors.purple, BlendMode.multiply);
+                        }
+                        isSelected[i] = (i == index) ? true : false;
+                      }
+                      // isSelected[index] = !isSelected[index];
+                    });
+                  },
+                  color: Colors.red[50],
+                  selectedColor: Colors.red,
+                  selectedBorderColor: Colors.red,
+                  splashColor: Colors.blue,
+                  highlightColor: Colors.orange,
+                  borderRadius: BorderRadius.circular(20),
+                )
+              ],
+            )),
       ),
     );
-  }
-}
-class ProductState extends ChangeNotifier {
-  int _quantity = 0;
-
-  int get quantity => _quantity;
-  set quantity(int newValue) {
-    _quantity = newValue;
-    notifyListeners();
   }
 }
