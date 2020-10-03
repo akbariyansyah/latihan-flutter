@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.orange,
           title: Text("Latihan Product Card"),
         ),
         body: ChangeNotifierProvider<ProductState>(
