@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
-import 'package:myapp/custom_progress_bar.dart';
-
+import 'package:myapp/product_card.dart';
 void main() {
   runApp(MyApp());
 }
@@ -13,37 +12,30 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Latihan Custom Progress Bar"),
+          title: Text("Latihan Product Card"),
         ),
-        body: Center(
-          child: ChangeNotifierProvider<TimeState>(
-            builder: (context) => TimeState(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Consumer<TimeState>(
-                  builder: (context,timeState,_) => CustomProgressBar(
-                    width: 200,
-                    total: 15,
-                    value: timeState.time,
-                  ),
+        body: ChangeNotifierProvider<ProductState>(
+          builder: (context) => ProductState(),
+          child: Container(
+            margin: EdgeInsets.all(30),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Consumer<ProductState>(
+                builder: (context,productState,_) => ProductCard(
+                  imageURL:
+                      "https://images.unsplash.com/photo-1546548970-71785318a17b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+                  name: "Fruits",
+                  price: "Rp. 10.000",
+                  quantity: productState.quantity,
+                  notification: (productState.quantity > 5) ? "Diskon 10 %" : null,
+                  onAddTap: () {
+                    productState.quantity++;
+                  },
+                  onDecTap: () {
+                    productState.quantity--;
+                  },
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Consumer<TimeState>(
-                  builder: (context,timeState,_) => RaisedButton(
-                    onPressed: () {
-                      Timer.periodic(Duration(seconds: 1), (timer) {
-                        if (timeState.time == 0) timer.cancel();
-                        else
-                        timeState.time -= 1;
-                      });
-                    },
-                    child: Text("Start"),
-                  ),
-                )
-              ],
+              ),
             ),
           ),
         ),
@@ -51,13 +43,12 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+class ProductState extends ChangeNotifier {
+  int _quantity = 0;
 
-class TimeState extends ChangeNotifier {
-  int _time = 10;
-  int get time => _time;
-
-  set time(int newTime) {
-    _time = newTime;
+  int get quantity => _quantity;
+  set quantity(int newValue) {
+    _quantity = newValue;
     notifyListeners();
   }
 }
