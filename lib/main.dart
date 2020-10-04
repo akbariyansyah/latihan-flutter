@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
               child: Consumer<ProductState>(
                 builder: (context,productState,_) => ProductCard(
                   imageURL:
-                      "https://images.unsplash.com/photo-1546548970-71785318a17b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-                  name: "Fruits",
+                      "assets/image-3.jpg",
+                  name: "Beautiful Painting",
                   price: "Rp. 10.000",
                   quantity: productState.quantity,
                   notification: (productState.quantity > 5) ? "Diskon 10 %" : null,

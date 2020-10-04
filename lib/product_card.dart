@@ -13,10 +13,10 @@ class ProductCard extends StatelessWidget {
   final int quantity;
   final String notification;
   final TextStyle textStyle = TextStyle(
-    fontSize: 40,
-    fontWeight: FontWeight.w600,
-    color: Colors.black,
-  );
+      fontSize: 40,
+      fontWeight: FontWeight.w200,
+      color: Colors.black,
+      fontFamily: "Lobster");
   final Function onAddTap;
   final Function onDecTap;
   ProductCard(
@@ -33,7 +33,7 @@ class ProductCard extends StatelessWidget {
       children: [
         AnimatedContainer(
           padding: EdgeInsets.all(5),
-          margin: EdgeInsets.only(left: 20,right: 20),
+          margin: EdgeInsets.only(left: 20, right: 20),
           width: 260,
           duration: Duration(milliseconds: 400),
           height: (notification != null) ? 490 : 450,
@@ -52,10 +52,14 @@ class ProductCard extends StatelessWidget {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              margin: EdgeInsets.only(bottom: 10),
+              margin: EdgeInsets.only(top: 1,bottom: 5),
               child: Text(
                 (notification != null) ? notification : "",
-                style: textStyle.copyWith(color: Colors.white, fontSize: 20),
+                style: textStyle.copyWith(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: "Lato",
+                    fontWeight: FontWeight.w400),
               ),
             ),
           ),
@@ -87,7 +91,7 @@ class ProductCard extends StatelessWidget {
                           topRight: Radius.circular(30),
                         ),
                         image: DecorationImage(
-                            image: NetworkImage(imageURL), fit: BoxFit.cover)),
+                            image: AssetImage(imageURL), fit: BoxFit.cover)),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 5, left: 10),
