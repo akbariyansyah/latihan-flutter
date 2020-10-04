@@ -1,47 +1,46 @@
-import 'dart:math';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myapp/bloc/user_bloc.dart';
-import 'package:myapp/model/user.dart';
-import 'package:myapp/ui/user_card.dart';
+import 'package:myapp/bloc/color_bloc.dart';
+import 'package:myapp/bloc/counter_bloc.dart';
+import 'package:myapp/ui/draft_page.dart';
+import 'package:myapp/ui/second_page.dart';
 
 class MainPage extends StatelessWidget {
-  final Random random = Random();
   @override
   Widget build(BuildContext context) {
-    UserBloc bloc = BlocProvider.of<UserBloc>(context);
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Latihan mvvm"),
-        backgroundColor: Colors.blueGrey,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 15,
+    return BlocBuilder<ColorBloc,Color>(
+      builder: (context,color) => DraftPage(
+        backgroundColor: color,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              BlocBuilder<CounterBloc,int>(
+                builder: (context,counter) => Text(
+                  counter.toString(),
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              BlocBuilder<ColorBloc,Color>(
+                builder: (context,color) => RaisedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SecondPage()));
+                  },
+                  color: color,
+                  shape: StadiumBorder(),
+                  child: Text(
+                    "Click Me",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
           ),
-          RaisedButton(
-            color: Colors.blueGrey,
-            onPressed: () {
-              bloc.dispatch(random.nextInt(10) + 1);
-            },
-            child: Text(
-              "Get User",
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          BlocBuilder<UserBloc, User>(
-              builder: (context, user) => (user is UninitializedUser)
-                  ? Center(
-                      child: Container(
-                      child: Text("Tidak ada User"),
-                    ))
-                  : UserCard(user)),
-        ],
+        ),
       ),
     );
   }
