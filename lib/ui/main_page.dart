@@ -25,7 +25,6 @@ class MainPage extends StatelessWidget {
             color: Colors.blueGrey,
             onPressed: () {
               bloc.dispatch(random.nextInt(10) + 1);
-              return Ani
             },
             child: Text(
               "Get User",
