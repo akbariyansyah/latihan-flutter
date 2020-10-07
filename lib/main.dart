@@ -24,7 +24,7 @@ class MainPage extends StatelessWidget {
     CounterBloc bloc = BlocProvider.of<CounterBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Latihan Bloc ver 1.0"),
+        title: Text("Latihan Bloc ver 1.0 "),
       ),
       body: Center(
         child: Column(
