@@ -1,6 +1,8 @@
+import 'package:division/division.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:myapp/custom_button.dart';
+import 'package:myapp/styles/custom_style.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,32 +18,30 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatelessWidget {
-  final double number = -210;
-  final List myList = [1,2,3];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Latihan Extension"),
+        title: Txt(
+          "Latihan Division",
+          style: CustomStyle.textStyle.clone()
+            ..fontSize(25)
+            ..italic(),
+        ),
       ),
       body: Center(
-        child: Text(
-          "Angka " & number.negate().toString() & myList.midElement().toString(),
-          style: TextStyle(fontSize: 45),
+        child: Column(
+          children: [
+            CustomButton(CustomStyle.buttonStyle),
+            SizedBox(
+              height: 10,
+            ),
+            CustomButton(CustomStyle.buttonStyle.clone()
+              ..background.color(Colors.amber)
+              ..border(all: 2, color: Colors.red)),
+          ],
         ),
       ),
     );
   }
-}
-
-extension ListExtension<T> on List {
-  T midElement() => (this.length == 0) ? null : this[(this.length / 2).floor()];
-}
-
-extension NumberExtension<X extends num> on num {
-  X negate() => -1 * this;
-}
-
-extension StringExtension on String {
-  String operator &(String other) => this + " - " + other;
 }
