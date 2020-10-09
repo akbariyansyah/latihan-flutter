@@ -10,6 +10,7 @@ class AuthServices {
       return firebaseUser;
     } catch (e) {
       print(e.toString());
+      print("Ini Error");
       return null;
     }
   }
