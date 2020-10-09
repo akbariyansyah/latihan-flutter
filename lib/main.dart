@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/auth_services.dart';
-import 'package:myapp/main_page.dart';
-import 'package:myapp/wrapper.dart';
+import 'file:///D:/enigma/Flutter/flutter-basic/my_app/myapp/lib/services/auth_services.dart';
+import 'file:///D:/enigma/Flutter/flutter-basic/my_app/myapp/lib/ui/main_page.dart';
+import 'file:///D:/enigma/Flutter/flutter-basic/my_app/myapp/lib/ui/wrapper.dart';
 import 'package:provider/provider.dart' as provider;
 
 
