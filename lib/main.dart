@@ -1,7 +1,7 @@
 import 'package:division/division.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/ui/pages/main_page.dart';
+import 'package:myapp/main_page.dart';
 
 
 void main() {
