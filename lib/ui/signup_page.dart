@@ -8,6 +8,7 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber,
       body: Hero(
         tag: "sign up",
         child: Center(
