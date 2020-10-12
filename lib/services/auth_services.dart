@@ -23,7 +23,7 @@ class AuthServices {
       return firebaseUser;
     } catch(e) {
       print(e.toString());
-      print("Error");
+      print("Error sign up");
     }
   }
   static Future<FirebaseUser> signIn(String email,String password) async {
