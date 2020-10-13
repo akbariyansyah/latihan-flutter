@@ -10,74 +10,81 @@ class LoginPage extends StatelessWidget {
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    FirebaseUser firebaseUser = Provider.of<FirebaseUser>(context);
-    return (firebaseUser == null) ? Hero(
-      tag: "login",
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Colors.purple,
-          body: Center(
-            child: AnimatedContainer(
-              duration: Duration(seconds: 1),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 200,
-                    height: 50,
-                    child: TextField(
-                      controller: emailController,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                          hintStyle: TextStyle(color: Colors.white),
-                          hintText: "Email..."),
-                    ),
-                  ),
-                  Container(
-                    width: 200,
-                    height: 50,
-                    child: TextField(
-                      obscureText: true,
-                      controller: passwordController,
-                      style: TextStyle(color: Colors.white),
-                      decoration: InputDecoration(
-                          hintStyle: TextStyle(color: Colors.white),
-                          hintText: "password..."),
-                    ),
-                  ),
-                  RaisedButton(
-                    child: Text(
-                      "Sign in",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    color: Colors.amber,
-                    onPressed: () {
-                      AuthServices.signIn(
-                          emailController.text, passwordController.text);
-                      // if (firebaseUser != null) {
-                      //   Navigator.pushReplacement(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => MainPage(firebaseUser)));
-                      // }
-                    },
-                  ),
-                  RaisedButton(
-                    child: Text(
-                      "Login anonymouse",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    color: Colors.purple,
-                    onPressed: () {
-                      AuthServices.signInAnonymouse();
-                    },
-                  ),
-                ],
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Column(
+
+            children: [
+              Container(
+                width: 200,
+                height: 50,
+                child: TextField(
+                  controller: emailController,
+
+                  decoration: InputDecoration(
+                      hintStyle: TextStyle(color: Colors.white),
+                      hintText: "Email..."),
+                ),
               ),
-            ),
+              Container(
+                width: 200,
+                height: 50,
+                child: TextField(
+                  obscureText: true,
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                      hintStyle: TextStyle(color: Colors.white),
+                      hintText: "password..."),
+                ),
+              ),
+              RaisedButton(
+                child: Text(
+                  "Sign in",
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.amber,
+                onPressed: () {
+                  AuthServices.signIn(
+                      emailController.text, passwordController.text);
+                },
+              ),
+              RaisedButton(
+                child: Text(
+                  "Login anonymouse",
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.purple,
+                onPressed: () {
+                  AuthServices.signInAnonymouse();
+                },
+              ),
+              SizedBox(height: 20,),
+              // Container(
+              //   width: 200,
+              //   height: 50,
+              //   child: TextField(controller: emailController,decoration: InputDecoration(
+              //       hintText: "Email..."
+              //   ),),
+              // ),
+              // Container(
+              //   width: 200,
+              //   height: 50,
+              //   child: TextField(controller: passwordController,decoration: InputDecoration(
+              //       hintText: "password..."
+              //   ),),
+              // ),
+              RaisedButton(
+                child: Text("Sign up",style: TextStyle(color: Colors.white),),
+                color: Colors.amber,
+                onPressed: () {
+                  AuthServices.signUp(emailController.text, passwordController.text);
+                },
+              ),
+            ],
           ),
         ),
       ),
-    ) : MainPage(firebaseUser);
+    );
   }
 }
