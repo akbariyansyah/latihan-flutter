@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'login_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,19 +9,9 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MainPage(),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LoginPage(),
     );
-  }
-}
-
-class MainPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Latihan "),
-        ),
-        body: Container());
   }
 }
