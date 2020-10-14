@@ -9,7 +9,7 @@ class LoginPage extends StatelessWidget {
         body: Center(
       child: RaisedButton(
         onPressed: () {
-          Get.off(MainPage());
+          Get.offNamed("/main");
         },
         child: Text("LOGIN"),
       ),

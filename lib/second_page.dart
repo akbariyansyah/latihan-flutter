@@ -23,6 +23,14 @@ class SecondPage extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
+              Column(
+                children: (Get.arguments as List<String>)
+                    .map((e) => Text(e))
+                    .toList() + [
+                      Text(Get.parameters["name"]),
+                      Text(Get.parameters["from"]),
+                ],
+              ),
               RaisedButton(
                 onPressed: () async {
                   String data = await Get.to<String>(ThirdPage());
