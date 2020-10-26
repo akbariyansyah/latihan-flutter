@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/person.dart';
 
 void main() {
   runApp(MyApp());
+
+
 }
 
 class MyApp extends StatelessWidget {
@@ -19,8 +22,9 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Latihan "),
+          title: Text("Latihan Equatable"),
         ),
         body: Container());
   }
 }
+
